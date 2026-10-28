@@ -65,6 +65,7 @@ nav a{color:#d8dbe0;font-size:13px}
 .field label{display:block;font-size:14px;font-weight:700;margin-bottom:7px}
 .field input,.field select,.field textarea{width:100%;padding:13px;border:1px solid #cbd0d7;border-radius:6px;font:inherit;background:#fff}
 .field textarea{resize:vertical}
+.field .help-text{display:block;color:#68717c;font-size:12px;margin-top:6px}
 .privacy{padding:17px;background:#f4f5f7;border-radius:7px;font-size:12px;line-height:1.8;color:#444c56}
 .privacy p{margin:6px 0}
 .privacy label{display:flex;align-items:flex-start;gap:8px;margin-top:12px;font-size:13px}
@@ -204,7 +205,7 @@ nav a{font-size:12px}
 </div>
 
 <div class="form-wrap">
-<form action="https://formsubmit.co/sh1212se@gmail.com" method="POST">
+<form id="estimate-form" action="https://formsubmit.co/sh1212se@gmail.com" method="POST" enctype="multipart/form-data">
 <input type="hidden" name="_subject" value="코킹필 홈페이지 신규 견적 문의">
 <input type="hidden" name="_captcha" value="true">
 <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
@@ -250,15 +251,21 @@ nav a{font-size:12px}
 <textarea id="details" name="문의내용" rows="4" placeholder="시공 부위와 현장 상태를 설명해 주세요."></textarea>
 </div>
 
+<div class="field">
+<label for="photo">시공 부위 사진 첨부 (선택)</label>
+<input id="photo" type="file" name="attachment" accept="image/jpeg,image/png,image/webp">
+<small class="help-text">JPG, PNG 또는 WEBP 사진 1장, 10MB 이하로 첨부해 주세요. 사진에 주소나 사람이 나오지 않도록 확인해 주세요.</small>
+</div>
+
 <div class="privacy">
 <strong>개인정보 수집 및 이용 안내</strong>
-<p>수집 항목: 연락처, 시공 지역, 문의 내용 및 직접 입력한 정보</p>
+<p>수집 항목: 연락처, 시공 지역, 문의 내용, 첨부 사진 및 직접 입력한 정보</p>
 <p>이용 목적: 시공 견적 상담 및 문의 응대</p>
 <p>보유 기간: 상담 종료 후 3개월 이내 삭제 (법령에 따른 보존 의무가 있는 경우 제외)</p>
-<p>이메일 접수 처리를 위해 FormSubmit 서비스를 이용합니다. 정식 운영 전 별도의 개인정보 처리방침을 안내할 예정입니다.</p>
+<p>이메일 접수 처리를 위해 FormSubmit 서비스를 이용합니다. 첨부 사진에도 주소 등 개인정보가 포함되지 않도록 확인해 주세요. 정식 운영 전 별도의 개인정보 처리방침을 안내할 예정입니다.</p>
 <label>
 <input type="checkbox" name="개인정보동의" value="동의" required>
-<span>개인정보 수집 및 이용에 동의합니다. (필수)</span>
+<span>연락처, 문의 내용 및 첨부 사진의 수집·이용에 동의합니다. (필수)</span>
 </label>
 </div>
 
@@ -276,5 +283,16 @@ nav a{font-size:12px}
 <p>© 2026 CAULKING_FILL. All rights reserved.</p>
 </footer>
 
+<script>
+const photoInput = document.getElementById("photo");
+photoInput.addEventListener("change", () => {
+  const file = photoInput.files[0];
+  photoInput.setCustomValidity(file && file.size > 10 * 1024 * 1024
+    ? "사진 파일은 10MB 이하로 선택해 주세요."
+    : "");
+});
+</script>
+
 </body>
 </html>
+
