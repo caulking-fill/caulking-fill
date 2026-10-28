@@ -48,18 +48,32 @@ nav a{color:#d8dbe0;font-size:13px}
 .service p{font-size:14px;color:#68707a}
 .dark{background:#191c22;color:#fff}
 .dark .section-head p{color:#b9bec6}
-.works{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}
-.work{background:linear-gradient(145deg,#292e36,#20242b);border:1px solid #ffffff24;border-radius:14px;overflow:hidden;box-shadow:0 20px 45px #0003}
-.work-media{position:relative;margin:0;aspect-ratio:3/4;background:#30353d;overflow:hidden}
-.work img{display:block;width:100%;height:100%;object-fit:contain}
-.work-badge{position:absolute;top:16px;left:16px;padding:7px 13px;background:#15181de6;border:1px solid #ffffff55;border-radius:30px;color:#fff;font-size:12px;font-weight:700}
-.work .info{padding:25px 26px 28px;border-top:1px solid #ffffff18}
-.work h3{margin:0 0 9px;font-size:22px;line-height:1.4}
-.work p{margin:0;color:#c7cbd1;font-size:14px}
-.work .work-label{color:#dbc69f;font-size:11px;letter-spacing:2px;font-weight:700;margin-bottom:10px}
-#works .section-head{max-width:650px;margin:0 auto 40px}
+.works{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.work{min-width:0;background:#242931;border:1px solid #ffffff24;border-radius:12px;overflow:hidden}
+.work[hidden],.works-more[hidden]{display:none}
+.work-open{display:block;width:100%;padding:0;border:0;background:transparent;color:inherit;text-align:left;font:inherit;cursor:pointer}
+.work-media{position:relative;aspect-ratio:1;background:#30353d;overflow:hidden}
+.work img{display:block;width:100%;height:100%;object-fit:cover}
+.work-badge{position:absolute;top:10px;left:10px;padding:4px 9px;border-radius:20px;background:#15181de6;color:#fff;font-size:11px}
+.work .info{padding:16px}
+.work h3{margin:0;font-size:17px;line-height:1.5}
+.work-category{display:block;margin-bottom:5px;color:#dbc69f;font-size:12px}
+.work-hint{display:block;margin-top:9px;color:#c7cbd1;font-size:12px}
+.works-filters{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.works-filter,.works-more{padding:10px 18px;border:1px solid #69717c;border-radius:24px;background:transparent;color:#fff;font:inherit;font-size:13px;cursor:pointer;min-height:44px}
+.works-filter[aria-pressed="true"]{background:#eee5d4;border-color:#eee5d4;color:#20242a}
+.works-more{display:block;margin:28px auto 0}
+#works button:focus-visible,.work-dialog button:focus-visible{outline:3px solid #dbc69f;outline-offset:4px}
+.works-status{text-align:center;color:#c7cbd1;font-size:13px;margin:18px 0}
+.work-dialog{width:min(760px,calc(100% - 24px));max-height:90dvh;padding:22px;border:1px solid #59616d;border-radius:14px;background:#20242b;color:#fff;overflow:auto}
+.work-dialog::backdrop{background:#000c}
+.work-dialog img{display:block;max-width:100%;width:auto;max-height:60dvh;margin:16px auto;object-fit:contain}
+.work-dialog h3{margin:12px 0 6px}
+.work-dialog p{color:#d0d4da}
+.dialog-actions{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dialog-actions button{padding:10px 16px;background:#eee5d4;color:#20242a;border:0;border-radius:6px;font:inherit;cursor:pointer;min-height:44px}
 #works .section-head p{font-size:14px}
-@media(max-width:760px){.work .info{padding:22px}.work h3{font-size:20px}}
+@media(max-width:760px){.works{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.work .info{padding:12px}.work h3{font-size:14px}.works-filter{padding:9px 14px}}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .step{padding:26px;background:#f5f6f8;border-radius:9px}
 .step b{color:#6c7785}
@@ -86,7 +100,7 @@ nav{justify-content:center;gap:12px}
 .hero{padding:75px 20px}
 .container{padding:65px 18px}
 .grid{grid-template-columns:repeat(2,1fr)}
-.works{grid-template-columns:1fr}
+
 .steps{grid-template-columns:1fr}
 
 .form-wrap{padding:20px}
@@ -155,35 +169,35 @@ nav a{font-size:12px}
 <div class="container">
 <div class="section-head">
 <div class="eyebrow">CAULKING_FILL WORKS</div>
-<h2 id="works-title">마감의 디테일, 실제 시공 사례</h2>
-<p>아래 사진은 모두 코킹필의 실제 시공 후 모습입니다.<br>시공 전 사진을 포함한 전후 비교 자료가 아닙니다.</p>
+<h2 id="works-title">실제 시공 사례</h2>
+<p>모두 실제 시공 후 사진입니다. 전후 비교 자료가 아닙니다.<br>사례를 누르면 전체 사진과 설명을 볼 수 있습니다.</p>
 </div>
-<div class="works">
-<article class="work">
-<figure class="work-media">
-<img src="sink-after.jpg" alt="세면대와 벽 접합부의 실리콘 시공 후 모습" width="1152" height="1536" loading="lazy" decoding="async">
-<figcaption class="work-badge">시공 후</figcaption>
-</figure>
-<div class="info">
-<p class="work-label">실제 시공 후 사진</p>
-<h3>세면대 주변 실리콘 마감</h3>
-<p>세면대와 벽이 만나는 부분의 마감</p>
+<div class="works-filters" role="group" aria-label="시공 부위별 사례 선택" hidden></div>
+<div class="works" id="works-grid">
+<!-- 현장 한 건당 article 하나를 추가합니다. data-photos에는 해당 현장의 시공 후 사진 경로를 쉼표로 구분합니다. -->
+<article class="work" data-category="욕실" data-photos="sink-after.jpg" data-description="세면대와 벽이 만나는 부분의 실리콘 시공 후 모습입니다.">
+<button class="work-open" type="button" aria-haspopup="dialog" aria-label="세면대 주변 실리콘 마감, 시공 후 사진 크게 보기">
+<div class="work-media"><img src="sink-after.jpg" alt="세면대와 벽이 만나는 부분의 실리콘 시공 후 모습입니다." width="1152" height="1536" loading="lazy" decoding="async"><span class="work-badge">시공 후</span></div>
+<div class="info"><span class="work-category">욕실</span><h3>세면대 주변 실리콘 마감</h3><span class="work-hint">사진 크게 보기 ↗</span></div>
+</button></article>
+<article class="work" data-category="걸레받이" data-photos="baseboard-after.jpg" data-description="벽과 걸레받이 사이 틈새의 실리콘 시공 후 모습입니다.">
+<button class="work-open" type="button" aria-haspopup="dialog" aria-label="걸레받이 실리콘 마감, 시공 후 사진 크게 보기">
+<div class="work-media"><img src="baseboard-after.jpg" alt="벽과 걸레받이 사이 틈새의 실리콘 시공 후 모습입니다." width="1152" height="1536" loading="lazy" decoding="async"><span class="work-badge">시공 후</span></div>
+<div class="info"><span class="work-category">걸레받이</span><h3>걸레받이 실리콘 마감</h3><span class="work-hint">사진 크게 보기 ↗</span></div>
+</button></article>
 </div>
-</article>
-<article class="work">
-<figure class="work-media">
-<img src="baseboard-after.jpg" alt="벽과 걸레받이 사이의 실리콘 시공 후 모습" width="1152" height="1536" loading="lazy" decoding="async">
-<figcaption class="work-badge">시공 후</figcaption>
-</figure>
-<div class="info">
-<p class="work-label">실제 시공 후 사진</p>
-<h3>걸레받이 실리콘 마감</h3>
-<p>벽과 걸레받이 사이의 틈새 마감</p>
-</div>
-</article>
-</div>
+<p class="works-status" aria-live="polite" aria-atomic="true"></p>
+<button class="works-more" type="button" hidden>시공 사례 더 보기</button>
+<noscript><p>사진을 길게 누르거나 새 탭에서 열면 전체 사진을 볼 수 있습니다.</p></noscript>
 </div>
 </section>
+<dialog class="work-dialog" aria-labelledby="work-dialog-title">
+<div class="dialog-actions"><span>실제 시공 후 사진</span><button type="button" class="dialog-close" autofocus>닫기</button></div>
+<h3 id="work-dialog-title"></h3>
+<p class="dialog-description"></p>
+<img class="dialog-image" alt="">
+<div class="dialog-actions"><button type="button" class="photo-prev" aria-label="이전 시공 후 사진">이전</button><span class="photo-count" aria-live="polite"></span><button type="button" class="photo-next" aria-label="다음 시공 후 사진">다음</button></div>
+</dialog>
 
 <section class="container" id="process">
 <div class="section-head">
@@ -305,6 +319,58 @@ photoInput.addEventListener("change", () => {
     ? "사진 파일은 10MB 이하로 선택해 주세요."
     : "");
 });
+</script>
+
+
+<script>
+(() => {
+  const section = document.getElementById("works");
+  const cards = [...section.querySelectorAll(".work")];
+  const filters = section.querySelector(".works-filters");
+  const more = section.querySelector(".works-more");
+  const status = section.querySelector(".works-status");
+  const dialog = document.querySelector(".work-dialog");
+  let category = "전체", limit = 6, photos = [], photoIndex = 0, activeCard, opener;
+  function render() {
+    const matching = cards.filter(card => category === "전체" || card.dataset.category === category);
+    cards.forEach(card => { card.hidden = !matching.includes(card) || matching.indexOf(card) >= limit; });
+    more.hidden = matching.length <= limit;
+    status.textContent = matching.length + "개 사례 중 " + Math.min(limit, matching.length) + "개 표시";
+    filters.querySelectorAll("button").forEach(button => button.setAttribute("aria-pressed", String(button.textContent === category)));
+  }
+  ["전체", ...new Set(cards.map(card => card.dataset.category))].forEach(label => {
+    const button = document.createElement("button");
+    button.type = "button"; button.className = "works-filter"; button.textContent = label;
+    button.addEventListener("click", () => { category = label; limit = 6; render(); });
+    filters.append(button);
+  });
+  filters.hidden = false;
+  more.addEventListener("click", () => {
+    const previous = limit; limit += 6; render();
+    const matching = cards.filter(card => category === "전체" || card.dataset.category === category);
+    matching[previous]?.querySelector("button").focus();
+  });
+  function showPhoto() {
+    const image = dialog.querySelector(".dialog-image");
+    image.src = photos[photoIndex];
+    image.alt = activeCard.querySelector("h3").textContent + " 시공 후 사진 " + (photoIndex + 1);
+    dialog.querySelector(".photo-count").textContent = (photoIndex + 1) + " / " + photos.length;
+    dialog.querySelector(".photo-prev").hidden = photos.length < 2;
+    dialog.querySelector(".photo-next").hidden = photos.length < 2;
+  }
+  cards.forEach(card => card.querySelector("button").addEventListener("click", event => {
+    activeCard = card; opener = event.currentTarget;
+    photos = card.dataset.photos.split(",").map(path => path.trim()).filter(Boolean); photoIndex = 0;
+    dialog.querySelector("h3").textContent = card.querySelector("h3").textContent;
+    dialog.querySelector(".dialog-description").textContent = card.dataset.description;
+    showPhoto(); dialog.showModal();
+  }));
+  dialog.querySelector(".dialog-close").addEventListener("click", () => dialog.close());
+  dialog.addEventListener("close", () => opener?.focus());
+  dialog.querySelector(".photo-prev").addEventListener("click", () => { photoIndex = (photoIndex - 1 + photos.length) % photos.length; showPhoto(); });
+  dialog.querySelector(".photo-next").addEventListener("click", () => { photoIndex = (photoIndex + 1) % photos.length; showPhoto(); });
+  render();
+})();
 </script>
 
 </body>
